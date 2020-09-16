@@ -31,12 +31,13 @@ h1 {
     background-color: rgba(0,255,255, .1);
     text-align: right;
     overflow: hidden;
+    position: relative;
 }
 
 #screen #output {
     display: block;
-    font-size: 70px;
-    margin-top: 20px;
+    font-size: 60px;
+    margin-top: 30px;
     margin-right: 20px;
     width: fill;
     
@@ -67,4 +68,11 @@ button {
 
 #equals {
     font-size: 50px;
+}
+#overflow {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 14px;
+    display: none;
 }

@@ -47,6 +47,7 @@ function clear() {
 function clearScreen() {
     let output = document.getElementById("output");
     output.textContent = "";
+    document.getElementById("overflow").style.display = "none";
 }
 
 function equalPress() {
@@ -58,11 +59,17 @@ function eval() {
     let output = document.getElementById("output");
     let thisNumber = output.textContent;
     clearScreen();
-    output.textContent += operate(parseInt(lastSavedNumber), parseInt(thisNumber), lastOperation);
+    output.textContent += operate(parseFloat(lastSavedNumber), parseFloat(thisNumber), lastOperation);
+    let numbersOnScreen = output.textContent.match(/\d/g) === null ? 0 : output.textContent.match(/\d/g).length;
+    if (numbersOnScreen > 8) {
+        document.getElementById("overflow").style.display = "block";
+        output.textContent = output.textContent.slice(0, 8-numbersOnScreen);
+    }
     nextClear = true;
 }
 
 function appendNumber() {
+    
     if (nextClear) {
         clearScreen();
         nextClear = false;
@@ -70,7 +77,9 @@ function appendNumber() {
     }
     let output = document.getElementById("output");
     let numText = this.textContent;
-    output.textContent += numText;
+    let numbersOnScreen = output.textContent.match(/\d/g) === null ? 0 : output.textContent.match(/\d/g).length;
+    if (numbersOnScreen < 8)
+        output.textContent += numText;
 }
 
 function storeAndReplace() {
