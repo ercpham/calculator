@@ -45,13 +45,15 @@ h1 {
 
 #buttons {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 50px 30px;
 }
 
 button {
     border-radius: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 .number {
@@ -63,11 +65,13 @@ button {
 }
 
 #clear {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #equals {
     font-size: 50px;
+    grid-column: 1 / 5;
+    margin-top : 5px;
 }
 #overflow {
     position: absolute;
@@ -75,4 +79,13 @@ button {
     right: 4px;
     font-size: 14px;
     display: none;
+}
+
+#decimal p{
+    font-size: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 10%;
+    left: 35%;
 }

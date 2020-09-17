@@ -51,8 +51,10 @@ function clearScreen() {
 }
 
 function equalPress() {
-    eval();
+    if (lastOperation !== "")
+        eval();
     lastOperation = "";
+    nextClear = true;
 }
 
 function eval() {
@@ -80,6 +82,17 @@ function appendNumber() {
     let numbersOnScreen = output.textContent.match(/\d/g) === null ? 0 : output.textContent.match(/\d/g).length;
     if (numbersOnScreen < 8)
         output.textContent += numText;
+}
+
+function appendDecimal() {
+    if (nextClear) {
+        clearScreen();
+        nextClear = false;
+        onFunction = false;
+    }
+    if (!document.getElementById("output").textContent.includes('.')) {
+        output.textContent += this.textContent;
+    }
 }
 
 function storeAndReplace() {
@@ -110,6 +123,8 @@ function addButtonListeners() {
     numButtons.forEach(listenNumButtons);
     let funcButtons = document.querySelectorAll(".function");
     funcButtons.forEach(listenFuncButtons);
+    let decbutton = document.getElementById("decimal");
+    decbutton.addEventListener("click", appendDecimal);
 }
 
 addButtonListeners();
