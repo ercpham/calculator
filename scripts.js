@@ -42,6 +42,7 @@ function divide(a, b) {
 function clear() {
     clearScreen();
     lastOperation = "";
+    lastSavedNumber = "";
 }
 
 function clearScreen() {
@@ -61,7 +62,9 @@ function eval() {
     let output = document.getElementById("output");
     let thisNumber = output.textContent;
     clearScreen();
-    output.textContent += operate(parseFloat(lastSavedNumber), parseFloat(thisNumber), lastOperation);
+    console.log(lastSavedNumber);
+    if (lastSavedNumber !== "" && lastSavedNumber !== ".")
+        output.textContent += operate(parseFloat(lastSavedNumber), parseFloat(thisNumber), lastOperation);
     let numbersOnScreen = output.textContent.match(/\d/g) === null ? 0 : output.textContent.match(/\d/g).length;
     if (numbersOnScreen > 8) {
         document.getElementById("overflow").style.display = "block";
